@@ -15,4 +15,20 @@ public class WeatherService {
 
     return weatherRepo.getByCity(city);
   }
+
+  public int getDaylightHours(String city){
+    CityInfo ci = forecastByCity(city);
+
+    // get sunset
+    String sunset = ci.getCurrentConditions().getSunset();
+
+    // get sunrise
+    String sunrise = ci.getCurrentConditions().getSunrise();
+
+    // get hours
+    int sunriseHour = sunrise.charAt(1);
+    int sunsetHour = sunset.charAt(1) + 10;
+
+    return sunsetHour-sunriseHour;
+  }
 }

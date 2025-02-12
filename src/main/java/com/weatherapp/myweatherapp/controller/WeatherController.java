@@ -28,13 +28,13 @@ public class WeatherController {
   @GetMapping("/daylight/{city1}/{city2}")
   public ResponseEntity<String> compareDaylightHours(@PathVariable("city1") String city1, @PathVariable("city2") String city2) {
 
-    CityInfo ci1 = weatherService.forecastByCity(city1);
-    CityInfo ci2 = weatherService.forecastByCity(city2);
+    // CityInfo ci1 = weatherService.forecastByCity(city1);
+    // CityInfo ci2 = weatherService.forecastByCity(city2);
 
-    int daylightHours1 = weatherService.getDaylightHours(city1);
-    int daylightHours2 = weatherService.getDaylightHours(city2);
-    
+    double daylightHours1 = weatherService.getDaylightHours(city1);
+    double daylightHours2 = weatherService.getDaylightHours(city2);
     String message = "";
+    // String message = city1 + " daylight hours are " + daylightHours1 + ", while " + city2 + " daylight hours are " + daylightHours2 + ". ";
 
     if(daylightHours1 > daylightHours2){
       message = city1 + " has the longest daylight hours.";

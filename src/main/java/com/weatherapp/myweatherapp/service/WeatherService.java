@@ -16,19 +16,40 @@ public class WeatherService {
     return weatherRepo.getByCity(city);
   }
 
-  public int getDaylightHours(String city){
+  // public int getDaylightHours(String city){
+  //   CityInfo ci = forecastByCity(city);
+
+  //   // get sunset
+  //   String sunset = ci.getCurrentConditions().getSunset();
+
+  //   // get sunrise
+  //   String sunrise = ci.getCurrentConditions().getSunrise();
+
+  //   // get hours
+  //   int sunriseHour = sunrise.charAt(1);
+  //   int sunsetHour = sunset.charAt(1) + 10;
+
+  //   return sunsetHour-sunriseHour;
+  // }
+
+  public double getDaylightHours(String city){
     CityInfo ci = forecastByCity(city);
 
-    // get sunset
     String sunset = ci.getCurrentConditions().getSunset();
-
-    // get sunrise
     String sunrise = ci.getCurrentConditions().getSunrise();
 
-    // get hours
-    int sunriseHour = sunrise.charAt(1);
-    int sunsetHour = sunset.charAt(1) + 10;
+    String[] sunsetList = sunset.split(":");
+    String[] sunriseList = sunrise.split(":");
 
-    return sunsetHour-sunriseHour;
+    // find the daylight hours
+    double sunsetMin = Double.parseDouble(sunsetList[1]);
+    double sunsetHour = Double.parseDouble(sunsetList[0]) + (sunsetMin / 60);
+
+    double sunriseMin = Double.parseDouble(sunriseList[1]);
+    double sunriseHour = Double.parseDouble(sunriseList[0]) + (sunriseMin / 60);
+
+    double daylightHours = sunsetHour - sunriseHour;
+
+    return daylightHours;
   }
 }

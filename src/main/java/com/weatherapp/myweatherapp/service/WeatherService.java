@@ -15,4 +15,56 @@ public class WeatherService {
 
     return weatherRepo.getByCity(city);
   }
+
+  // public int getDaylightHours(String city){
+  //   CityInfo ci = forecastByCity(city);
+
+  //   // get sunset
+  //   String sunset = ci.getCurrentConditions().getSunset();
+
+  //   // get sunrise
+  //   String sunrise = ci.getCurrentConditions().getSunrise();
+
+  //   // get hours
+  //   int sunriseHour = sunrise.charAt(1);
+  //   int sunsetHour = sunset.charAt(1) + 10;
+
+  //   return sunsetHour-sunriseHour;
+  // }
+
+  public double getDaylightHours(String city){
+    CityInfo ci = forecastByCity(city);
+
+    String sunset = ci.getCurrentConditions().getSunset();
+    String sunrise = ci.getCurrentConditions().getSunrise();
+
+    String[] sunsetList = sunset.split(":");
+    String[] sunriseList = sunrise.split(":");
+
+    // find the daylight hours
+    double sunsetMin = Double.parseDouble(sunsetList[1]);
+    double sunsetHour = Double.parseDouble(sunsetList[0]) + (sunsetMin / 60);
+
+    double sunriseMin = Double.parseDouble(sunriseList[1]);
+    double sunriseHour = Double.parseDouble(sunriseList[0]) + (sunriseMin / 60);
+
+    double daylightHours = sunsetHour - sunriseHour;
+
+    return daylightHours;
+  }
+
+  public boolean isRaining(String city){
+    CityInfo ci = forecastByCity(city);
+
+    String conditions = ci.getCurrentConditions().getConditions();
+    String[] conditionsList = conditions.split(", ");
+
+    for(int i=0; i<conditionsList.length; i++){
+      if(conditionsList[i].equals("Rain")){
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

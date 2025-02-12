@@ -52,4 +52,19 @@ public class WeatherService {
 
     return daylightHours;
   }
+
+  public boolean isRaining(String city){
+    CityInfo ci = forecastByCity(city);
+
+    String conditions = ci.getCurrentConditions().getConditions();
+    String[] conditionsList = conditions.split(", ");
+
+    for(int i=0; i<conditionsList.length; i++){
+      if(conditionsList[i].equals("Rain")){
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

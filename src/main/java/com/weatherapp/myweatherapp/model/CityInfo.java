@@ -47,6 +47,10 @@ public class CityInfo {
     public String getSunrise(){
       return sunrise;
     }
+
+    public String getConditions(){
+      return conditions;
+    }
   }
 
   static class Days {

@@ -27,19 +27,10 @@ public class WeatherController {
   @GetMapping("/daylight/{city1}/{city2}")
   public ResponseEntity<String> compareDaylightHours(@PathVariable("city1") String city1, @PathVariable("city2") String city2) {
     try{
-      double daylightHours1 = weatherService.getDaylightHours(city1);
-      double daylightHours2 = weatherService.getDaylightHours(city2);
-      String message = "";
+      CityInfo ci1 = weatherService.forecastByCity(city1);
+      CityInfo ci2 = weatherService.forecastByCity(city2);
 
-      if(daylightHours1 > daylightHours2){
-        message = city1 + " has the longest daylight hours.";
-      }
-      else if(daylightHours1 < daylightHours2){
-        message = city2 + " has the longest daylight hours.";
-      }
-      else{
-        message = "Both cities have the same daylight hours.";
-      }
+      String message = weatherService.compareDaylightHours(ci1, ci2, city1, city2);
 
       return ResponseEntity.ok(message);
     }catch (Exception e) {
@@ -51,29 +42,14 @@ public class WeatherController {
   @GetMapping("/rainfall/{city1}/{city2}")
   public ResponseEntity<String> rainCheck(@PathVariable("city1") String city1, @PathVariable("city2") String city2){
     try{
-      String message = "";
-      Boolean isRaining1 = weatherService.isRaining(city1);
-      Boolean isRaining2 = weatherService.isRaining(city2);
+      CityInfo ci1 = weatherService.forecastByCity(city1);
+      CityInfo ci2 = weatherService.forecastByCity(city2);
 
-      if(isRaining1 & isRaining2){
-        message = "It is currently raining in both cities.";
-      }
-      else if(isRaining1){
-        message = "It is currently raining in " + city1 + ".";
-      }
-      else if(isRaining2){
-        message = "It is currently raining in " + city2 + ".";
-      }
-      else{
-        message = "It is currently not raining in any of the cities.";
-      }
-
+      String message = weatherService.rainCheck(ci1, ci2, city1, city2);
       return ResponseEntity.ok(message);
     }catch (Exception e) {
       return ResponseEntity.status(500).body("Error checking where it is raining: " + e.getMessage());
     }
-
-    
   }
 
 

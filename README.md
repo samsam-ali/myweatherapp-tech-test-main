@@ -1,6 +1,8 @@
 # MyWeather App Tech Test
 
-## Features
+Welcome to the MyWeather App Tech Test. Here I will explain my implementation.
+
+## My Features
 
 ### 1. **Daylight Hours Comparison**
 This feature allows users to compare the length of daylight hours (the time between sunrise and sunset) between two cities and return which city has the longest daylight.
@@ -13,7 +15,7 @@ This feature allows users to compare the length of daylight hours (the time betw
 
 #### Example Response:
 ```json
-"Paris has the longest daylight hours."
+"paris has the longest daylight hours."
 ```
 
 ### 2. **Rain Check**
@@ -27,7 +29,7 @@ This feature checks if it is currently raining in either of the two cities provi
 
 #### Example Response:
 ```json
-"Paris has the longest daylight hours."
+"It is currently raining in paris."
 ```
 
 ## Function Descriptions

@@ -1,40 +1,62 @@
 # MyWeather App Tech Test
 
-Welcome to the MyWeather App Tech Test.
+## Features
 
-## The Challenge
+### 1. **Daylight Hours Comparison**
+This feature allows users to compare the length of daylight hours (the time between sunrise and sunset) between two cities and return which city has the longest daylight.
 
-You are tasked with implementing two new features in the app:
+#### How It Works:
+- **Endpoint**: `GET /daylight/{city1}/{city2}`
+- Example: `GET /daylight/London/Paris`
+- The system retrieves the weather data for both cities, calculates the daylight hours by subtracting the sunrise time from the sunset time, and compares the results.
+- Response: Returns a message stating which city has the longest daylight hours.
 
-1. **Daylight Hours Comparison:** Given two city names, compare the length of the daylight hours between them and return the city with the longest day. In this context, "daylight hours" means the time between sunrise and sunset.
+#### Example Response:
+```json
+"Paris has the longest daylight hours."
+```
 
-2. **Rain Check:** Given two city names, check which city it is currently raining in.
+### 2. **Rain Check**
+This feature checks if it is currently raining in either of the two cities provided by the user.
 
-In addition to implementing these 2 features, you will also need to write tests verifying that your code works as expected.
+#### How It Works:
+- **Endpoint**: `GET /rainfall/{city1}/{city2}`
+- Example: `GET /rainfall/London/Paris`
+- The system retrieves the current weather conditions for both cities and checks if the condition includes "Rain."
+- Response: Returns a message indicating if it is raining in one, both or none of the cities.
 
-If possible, include exception handling in the controller.
+#### Example Response:
+```json
+"Paris has the longest daylight hours."
+```
 
-Finally, you can write any documentation as you see fit, explaining your choices and how the code works.
+## Function Descriptions
 
-## The Codebase
+### WeatherController
+- **compareDaylightHours**:  
+  This method takes two city names and compares the daylight hours between them. It calls `WeatherService.compareDaylightHours()` to perform the comparison and return a message showing which city has the longest daylight.
 
-The codebase is a Java application built with the Spring framework. It includes a `WeatherController` class where you will add your new features.
+- **rainCheck**:  
+  This method takes two city names and checks if it is raining in either of the cities. It uses `WeatherService.rainCheck()` to see the current weather conditions and returns a message stating if it is raining in one or both cities.
 
-## Implementation Details
+### WeatherService
+- **getDaylightHours**:  
+  Calculates the daylight hours for a given city based on the sunrise and sunset times.
 
-You will need to implement these features by adding new endpoints to the `WeatherController`.
+- **compareDaylightHours**:  
+  Compares the daylight hours of two cities and returns a message showing which city has the longest daylight hours.
 
-### Prerequisites
+- **isRaining**:  
+  Checks if it is raining in a given city by checking the weather conditions.
 
-- [Java sdk 17](https://openjdk.java.net/projects/jdk/17/)
-- [Maven 3.6.3+](https://maven.apache.org/install.html)
-- API key for [Visual Crossing Weather API](https://www.visualcrossing.com/weather-data-editions). 
-  - This can be done by creating a free account on the above link. Then you will need to add your key to the `weather.visualcrossing.key` field in src/main/resources/application.properties
+- **rainCheck**:  
+  Compares the rain status between two cities and returns a message showing where it is raining (if at all).
 
-## Submission
 
-* Push the downloaded version of this repo to your Github
-* Make a branch for your changes
-* Once you're ready to submit, raise a Pull Request to merge your changes with your main branch and share the repo with us.
+### Setup Instructions
+- Clone the repository.
+- Install dependencies by running mvn install.
+- Run the application using mvn spring-boot:run.
 
-Good luck!
+
+

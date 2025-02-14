@@ -1,6 +1,6 @@
 # MyWeather App Tech Test
 
-Welcome to the MyWeather App Tech Test. Here I will explain my implementation.
+Welcome to MyWeather App. Here I will explain my implementation.
 
 ## My Features
 
